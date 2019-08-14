@@ -122,7 +122,37 @@ class People {
 
 //instantiate 
 const person3 = new People ('Hilbert','Mooch','15-09-1995');
-console.log(person3.getFullname());
+//console.log(person3.getFullname());
 
-//the DOM!
+//the DOM! The DOM is a tree structure of your whole document 
+
+//selecting elements from the DOM 
+//Single element selectors and multiple element selectors 
+const form = document.getElementById('my-form');
+const form1 = document.querySelector('h1');
+//console.log(form1);
+
+//Manipulating the DOM 
+const ul = document.querySelector('.items');
+ul.firstElementChild.textContent = 'Look at Me';
+const btn = document.querySelector('.btn');
+const email = document.querySelector('#email');
+const name1 = document.querySelector('#name');
+const msg = document.querySelector('.msg');
+
+btn.addEventListener('click', (e) => {
+    if(email.value === "" || name1.value === ""){
+        e.preventDefault();
+        btn.style.background = 'green';
+        msg.classList.add('error');
+        msg.innerHTML = 'Please Enter All Fields';
+    }
+    else
+    {
+       
+        btn.style.background = 'red';
+        alert('Success');
+    }
+    
+});
 
