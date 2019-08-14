@@ -2,13 +2,14 @@
 var id = 0; 
 var listItem; 
 var taskArray = [];
-var checkbox; 
+//var checkbox; 
 
 //Const variables
 const ul = document.querySelector('.items');
 const textBox = document.querySelector('#task');
 const btn = document.querySelector('.btn');
 const msg = document.querySelector('.msg');
+const refreshbtn = document.querySelector('.refresh');
 //
 
 class toDo {  
@@ -23,15 +24,17 @@ class toDo {
     addToList(task){
         var checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.name = "task number:" + id; 
-        checkbox.value = "value";
-        checkbox.className = "checkbox" + id;
+        checkbox.name = "checkbox"; 
+        checkbox.value = task;
+        //checkbox.className = "checkbox";
         var textNode = document.createTextNode(task);
         var breakpoint = document.createElement("br");
         ul.appendChild(checkbox);
         ul.appendChild(textNode);
         ul.appendChild(breakpoint);
+      
     }
+ 
 }
 
 
@@ -47,18 +50,34 @@ btn.addEventListener('click', (e) => {
       taskArray[id] = task; 
       task.incrementID();
       task.addToList(listItem);
+      refreshbtn.style.display = "inline"
     }
 });
 
-if (id > 0) {
-   console.log(document.querySelector(".checkbox"+id));
- checkbox = document.querySelector(".checkbox"+id).addEventListener('change' , (e) => {
-    if(checkbox.checked) {
-        console.log('working')
-        checkbox.style.background = 'red';
+refreshbtn.addEventListener('click', (e) => {
+    var checkboxNode = document.querySelectorAll('input[name=checkbox]'); 
+    checkboxNode.forEach((checkitem) => {
+          if(checkitem.checked){
+            
+              var strike = document.createElement('strike');
+              var txtNode = document.createTextNode(checkitem.value);
+              strike.appendChild(txtNode);
+              //checkitem.appendChild(strike);
+          }
+          else {
+              alert('Almost there');
+          }
+    })
+    if(checkboxNode.checked){
+        alert('is Checked bro!');
+    }  
+    else{
+        alert('not checked');
     }
- });
-}
+});
+
+ 
+
 
 
 
