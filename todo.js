@@ -2,10 +2,12 @@
 var id = 0; 
 var listItem; 
 var taskArray = [];
+var completedList =[]; 
 //var checkbox; 
 
 //Const variables
 const ul = document.querySelector('.items');
+const done = document.querySelector('.done');
 const textBox = document.querySelector('#task');
 const btn = document.querySelector('.btn');
 const msg = document.querySelector('.msg');
@@ -27,11 +29,13 @@ class toDo {
         checkbox.name = "checkbox"; 
         checkbox.value = task;
         //checkbox.className = "checkbox";
+      
         var textNode = document.createTextNode(task);
         var breakpoint = document.createElement("br");
         ul.appendChild(checkbox);
         ul.appendChild(textNode);
         ul.appendChild(breakpoint);
+        
       
     }
  
@@ -51,30 +55,43 @@ btn.addEventListener('click', (e) => {
       task.incrementID();
       task.addToList(listItem);
       refreshbtn.style.display = "inline"
+      textBox.value = '';
     }
 });
 
 refreshbtn.addEventListener('click', (e) => {
     var checkboxNode = document.querySelectorAll('input[name=checkbox]'); 
+    var i = 0; 
     checkboxNode.forEach((checkitem) => {
           if(checkitem.checked){
-            
-              var strike = document.createElement('strike');
-              var txtNode = document.createTextNode(checkitem.value);
-              strike.appendChild(txtNode);
-              //checkitem.appendChild(strike);
+            var updatedList = taskArray; 
+            updatedList.filter((namedTask) => {
+                if(namedTask.task === checkitem.value && completedList.indexOf(namedTask.task) < 0){
+                    console.log();
+                    namedTask.isComplete = true;
+                    completedList[i++] = namedTask.task; 
+                }
+            })
           }
-          else {
-              alert('Almost there');
-          }
+          return completedList;
     })
-    if(checkboxNode.checked){
-        alert('is Checked bro!');
-    }  
-    else{
-        alert('not checked');
-    }
+    
+    completedList.filter(mapToCompleted(completedList));
 });
+
+function mapToCompleted (completedArray){
+    for(i = 0; i < completedArray.length; i++){
+        var textNode = document.createTextNode(completedArray[i]);
+        var strike = document.createElement('strike');
+        strike.innerText = textNode.nodeValue;
+        var breakpoint = document.createElement("br");
+        done.appendChild(strike);
+        //done.appendChild(textNode);
+        done.appendChild(breakpoint);
+        //refreshbtn.style.display = "none"
+    }
+  
+}
 
  
 
