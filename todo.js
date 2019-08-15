@@ -27,13 +27,18 @@ class toDo {
         var checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.name = "checkbox"; 
-        checkbox.value = task;
+        var str = task;
+        var str= str.trim()
+        checkbox.value = str;
         //checkbox.className = "checkbox";
       
         var textNode = document.createTextNode(task);
+        var span = document.createElement('span');
+        span.className =textNode.nodeValue.trim();
+        span.innerHTML = textNode.nodeValue;
         var breakpoint = document.createElement("br");
         ul.appendChild(checkbox);
-        ul.appendChild(textNode);
+        ul.appendChild(span);
         ul.appendChild(breakpoint);
         
       
@@ -64,10 +69,11 @@ refreshbtn.addEventListener('click', (e) => {
     var i = 0; 
     checkboxNode.forEach((checkitem) => {
           if(checkitem.checked){
+            checkitem.type = 'hidden';
+            checkitem.nextElementSibling.remove();
             var updatedList = taskArray; 
             updatedList.filter((namedTask) => {
                 if(namedTask.task === checkitem.value && completedList.indexOf(namedTask.task) < 0){
-                    console.log();
                     namedTask.isComplete = true;
                     completedList[i++] = namedTask.task; 
                 }
@@ -76,7 +82,7 @@ refreshbtn.addEventListener('click', (e) => {
           return completedList;
     })
     
-    completedList.filter(mapToCompleted(completedList));
+    mapToCompleted(completedList);
 });
 
 function mapToCompleted (completedArray){
