@@ -29,6 +29,7 @@ class listItem {
 function addToList(task) {
     var checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.className = "checkbox";
         checkbox.name = id.toString(); 
         checkbox.value = task;
         var textNode = document.createTextNode(task);
