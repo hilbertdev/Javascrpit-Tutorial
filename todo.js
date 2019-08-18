@@ -64,8 +64,22 @@ function addToList(task) {
 //This is the event handler for adding a task into the todo list 
 btnAdd.addEventListener('click', (e) => {
     if(document.querySelector('#task').value === ''){
-        errMsg.innerHTML = 'Please Enter A task'
+        errMsg.classList.add('error');
+        taskEntered.classList.add('error');
+        errMsg.innerHTML = 'Cannot Enter Empty String into ToDo list!';
+        errMsg.style.backgroundColor = '#A52A2A';
         taskEntered.style.borderColor = 'red';
+        setTimeout(()=>{
+            errMsg.classList.remove('error');
+            taskEntered.classList.remove('error');
+        }, 200);
+        
+        setTimeout(()=> {
+         errMsg.innerHTML = ' ';
+         taskEntered.style.borderColor = 'grey';
+         errMsg.style.backgroundColor =  '#fff8dc';
+        }, 2000);
+        
     }
     else {
       let item = document.querySelector('#task').value;
@@ -79,7 +93,21 @@ btnAdd.addEventListener('click', (e) => {
       updateStatus();
       }
       else {
-        errMsg.innerHTML = 'Item exists'; 
+        errMsg.classList.add('error');
+        taskEntered.classList.add('error');
+        errMsg.innerHTML = 'You have already Entered' + ' ' + '\'' + document.querySelector('#task').value + '\' ' + 'to the list!' ; 
+        errMsg.style.backgroundColor = '#A52A2A';
+        taskEntered.style.borderColor = 'red';
+        setTimeout(()=>{
+            errMsg.classList.remove('error');
+            taskEntered.classList.remove('error');
+        }, 200);
+
+        setTimeout(()=> {
+         errMsg.innerHTML = ' ';
+         taskEntered.style.borderColor = 'grey';
+         errMsg.style.backgroundColor =  '#fff8dc';
+        }, 2000);
       }
     }
 });

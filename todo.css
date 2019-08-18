@@ -12,6 +12,7 @@
     display: inline;
     font-size: 14px;
     margin-left: 35%;
+    transition: background-color #00FF00 , 10s;
 }
 .msg {
     background-color: #fff8dc;
@@ -47,3 +48,21 @@
     width: 25px;
     background-color: #eee;
   }
+
+.error{
+    position: relative;
+    animation: shake .1s linear;
+    animation-iteration-count: 3;
+}
+
+@keyframes shake {
+    0% { left: -5px; }
+    100% { right: -5px; }
+}
+.btnAdd:hover {
+   background-color: #32CD32;
+   color: black;
+}
+.btnClear:hover {
+    background-color: #32CD32;
+}
